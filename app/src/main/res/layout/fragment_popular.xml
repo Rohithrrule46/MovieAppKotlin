@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    tools:context=".ui.PopularFragment">
+
+  <LinearLayout
+      android:layout_alignParentTop="true"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/linear_header"
+
+      android:layout_marginStart="@dimen/_12sdp"
+      android:layout_marginTop="@dimen/_10sdp"
+      android:layout_marginEnd="@dimen/_20sdp"
+      android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/tv_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/myfont"
+        android:paddingTop="5dp"
+        android:text="Watchlists"
+        android:layout_weight="3"
+        android:textColor="@color/yellow"
+        android:textSize="@dimen/_21sdp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:src="@drawable/ic_search"
+        />
+
+  </LinearLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:layout_below="@id/linear_header"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="@dimen/_10sdp"
+      android:layout_marginTop="@dimen/_10sdp"
+      android:id="@+id/popularMovieRv"/>
+
+  <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="visible"
+      android:progressTint="@color/yellow"
+      android:layout_centerInParent="true" />
+
+</RelativeLayout>
