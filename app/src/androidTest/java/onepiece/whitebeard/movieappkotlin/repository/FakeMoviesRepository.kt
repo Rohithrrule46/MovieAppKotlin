@@ -11,7 +11,7 @@ import org.mockito.Mockito.mock
 import retrofit2.Response
 import javax.inject.Inject
 
-class FakeMoviesRepository: MovieRepositotyInterface {
+class FakeMoviesRepository: MovieRepositoryProtocol {
 
     private val moviesItem = mutableListOf<PopularMovies>()
 

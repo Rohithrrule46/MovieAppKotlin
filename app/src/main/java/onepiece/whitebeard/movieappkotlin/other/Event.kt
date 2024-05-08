@@ -2,8 +2,7 @@ package onepiece.whitebeard.movieappkotlin.other
 
 open class Event<T>(private val content: T) {
 
-    var hasBeenHandled = false
-        private set           // Allows external read but not write
+    private var hasBeenHandled = false
 
     /*
     * returns the content and prevents its use again

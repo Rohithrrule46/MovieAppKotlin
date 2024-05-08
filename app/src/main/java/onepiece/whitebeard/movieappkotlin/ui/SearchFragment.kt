@@ -37,15 +37,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         ViewModelProvider(requireActivity()).get(MoviesViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,7 +50,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
 
-        /*Searching By Edittext and Getting News From API*/
+        /*Searching By Edittext and Getting Movies From API*/
         var job: Job? = null
         binding.etSearch.addTextChangedListener { editable ->
             job?.cancel()
@@ -70,7 +66,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
         }
 
-        observeSearchMovieLiveData()
+        observeSearchLiveData()
         // Adapter Click and Go to Articles Fragment
         movieAdapter.setOnItemClickListener { movie ->
             val intent = Intent(context, MovieDetailsActivity::class.java)
@@ -90,52 +86,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         isLoading = true
     }
 
-    private fun observeSearchMovieLiveData() {
-        moviesViewModel.searchMovies.observe(viewLifecycleOwner, Observer { response ->
-            when (response.status) {
-                Status.LOADING ->{
-                    showProgressBar()
-                }
-
-                Status.SUCCESS ->{
-                    val moviesList: List<PopularMovies> = response.data!!.results!!
-                    moviesList.forEach { popularMovies ->
-                        moviesViewModel.insertOrUpdateMovies(popularMovies)
-                    }
-                    movieAdapter.differ.submitList(moviesList as ArrayList<PopularMovies>)
-
-                    val totalPages = response.data.total_results / Constant.QUREY_PAGE_SIZE + 2
-                    isLastPage = moviesViewModel.searchMoviesPage == totalPages
-                    if (isLastPage) {
-                        binding.rvSearchNews.setPadding(0, 0, 0, 0)
-                    }
-
-                    hideProgressBar()
-                }
-
-                Status.ERROR ->{
-                    Snackbar.make(
-                        binding.root,
-                        response.message ?: "An unknown error occured.",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                    hideProgressBar()
-
-                }
-            }
-
-        })
-    }
-
     private fun observeSearchLiveData() {
-        moviesViewModel.searchLivedata.observe(viewLifecycleOwner, Observer { result ->
+        moviesViewModel.searchLivedata.observe(viewLifecycleOwner) { result ->
             result.getContentIfNotHandled()?.let { response ->
                 when (response.status) {
-                    Status.LOADING ->{
+                    Status.LOADING -> {
                         showProgressBar()
                     }
 
-                    Status.SUCCESS ->{
+                    Status.SUCCESS -> {
                         val moviesList: List<PopularMovies> = response.data!!.results!!
                         moviesList.forEach { popularMovies ->
                             moviesViewModel.insertOrUpdateMovies(popularMovies)
@@ -151,7 +110,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         hideProgressBar()
                     }
 
-                    Status.ERROR ->{
+                    Status.ERROR -> {
                         Snackbar.make(
                             binding.root,
                             response.message ?: "An unknown error occured.",
@@ -164,7 +123,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
 
-        })
+        }
     }
 
     //FOR PAGINATION
@@ -172,7 +131,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     var isLastPage = false
     var isScrolling = false
 
-    val onScrollListener = object : RecyclerView.OnScrollListener() {
+    private val onScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
@@ -215,6 +174,5 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             addOnScrollListener(this@SearchFragment.onScrollListener)
         }
     }
-
 
 }

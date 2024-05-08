@@ -6,14 +6,14 @@ import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
 import onepiece.whitebeard.movieappkotlin.other.Resource
 import retrofit2.Response
 
-interface MovieRepositotyInterface {
+interface MovieRepositoryProtocol {
 
 
     suspend fun insertMovieIntoDatabase(movie:PopularMovies)
 
     suspend fun deleteMovieFromDatabase(movie:PopularMovies)
 
-    fun observeMoviesLiveData() : LiveData<List<PopularMovies>>
+    fun observeMoviesLiveData(): LiveData<List<PopularMovies>>
 
     suspend fun getMoviesListFromApi() : Resource<PopularMovieResponse>
 

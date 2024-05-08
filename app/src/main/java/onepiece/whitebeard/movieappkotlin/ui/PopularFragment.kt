@@ -21,19 +21,16 @@ import onepiece.whitebeard.movieappkotlin.viewmodel.MoviesViewModel
 class PopularFragment : Fragment() {
 
     private lateinit var binding: FragmentPopularBinding
-    val moviesViewModel: MoviesViewModel by lazy {
-        ViewModelProvider(requireActivity()).get(MoviesViewModel::class.java)
+    private val moviesViewModel: MoviesViewModel by lazy {
+        ViewModelProvider(requireActivity())[MoviesViewModel::class.java]
     }
 
-    private lateinit var movieAdaper: PopularMoviesAdapter
-    private lateinit var movie: PopularMovies
+    private lateinit var movieAdapter: PopularMoviesAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        popularViewModel = (activity as MainActivity).viewmodel
-
-        movieAdaper = PopularMoviesAdapter()
+        movieAdapter = PopularMoviesAdapter()
 
     }
 
@@ -60,7 +57,7 @@ class PopularFragment : Fragment() {
     private fun setUpRecyclerView() {
         binding.popularMovieRv.apply {
             layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
-            adapter = movieAdaper
+            adapter = movieAdapter
         }
     }
 
@@ -74,13 +71,13 @@ class PopularFragment : Fragment() {
                         moviesList.forEach { popularMovies ->
                             moviesViewModel.insertOrUpdateMovies(popularMovies)
                         }
-                        movieAdaper.setMoviesAdapter(moviesList as ArrayList<PopularMovies>)
+                        movieAdapter.setMoviesAdapter(moviesList as ArrayList<PopularMovies>)
                         binding.progressBar.visibility = View.GONE
                     }
                     Status.ERROR -> {
                         Snackbar.make(
                             binding.root,
-                            result.message ?: "An unknown error occured.",
+                            result.message ?: "An unknown error occurred.",
                             Snackbar.LENGTH_LONG
                         ).show()
                         binding.progressBar.visibility = View.GONE
@@ -96,7 +93,7 @@ class PopularFragment : Fragment() {
     }
 
     private fun movieAdapterClick(){
-        movieAdaper.onItemClick = {
+        movieAdapter.onItemClick = {
             val intent = Intent(context, MovieDetailsActivity::class.java)
             intent.putExtra("MOVIE_DETAIL", it)
             startActivity(intent)

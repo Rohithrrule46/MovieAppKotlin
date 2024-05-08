@@ -11,8 +11,8 @@ import onepiece.whitebeard.movieappkotlin.api.ApiInterface
 import onepiece.whitebeard.movieappkotlin.api.RetrofitInstance
 import onepiece.whitebeard.movieappkotlin.database.MoviesDao
 import onepiece.whitebeard.movieappkotlin.database.MoviesDatabase
-import onepiece.whitebeard.movieappkotlin.repository.MovieRepositotyInterface
-import onepiece.whitebeard.movieappkotlin.repository.MoviesRepository
+import onepiece.whitebeard.movieappkotlin.repository.MovieRepositoryProtocol
+import onepiece.whitebeard.movieappkotlin.repository.MoviesRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -33,7 +33,7 @@ object AppModule {
     fun provideMovieRepository(
         dao: MoviesDao,
         api: ApiInterface
-    ) = MoviesRepository(dao, api) as MovieRepositotyInterface
+    ) = MoviesRepositoryImpl(dao, api) as MovieRepositoryProtocol
 
     @Singleton
     @Provides

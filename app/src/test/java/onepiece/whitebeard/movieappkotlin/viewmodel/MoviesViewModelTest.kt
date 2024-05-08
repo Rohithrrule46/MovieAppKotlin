@@ -13,7 +13,7 @@ import onepiece.whitebeard.movieappkotlin.api.ApiInterface
 import onepiece.whitebeard.movieappkotlin.database.MoviesDao
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
 import onepiece.whitebeard.movieappkotlin.other.Resource
-import onepiece.whitebeard.movieappkotlin.repository.MoviesRepository
+import onepiece.whitebeard.movieappkotlin.repository.MoviesRepositoryImpl
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -35,7 +35,7 @@ class MoviesViewModelTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    private lateinit var testRepo: MoviesRepository
+    private lateinit var testRepo: MoviesRepositoryImpl
     lateinit var mockWebServer: MockWebServer
     lateinit var apiInterface: ApiInterface
     lateinit var gson: Gson
@@ -57,8 +57,8 @@ class MoviesViewModelTest {
 
         dao = mock(MoviesDao::class.java)
 
-        testRepo = MoviesRepository(dao, apiInterface)
-        testRepo = mock(MoviesRepository::class.java)
+        testRepo = MoviesRepositoryImpl(dao, apiInterface)
+        testRepo = mock(MoviesRepositoryImpl::class.java)
         viewModel = MoviesViewModel(testRepo)
 //        viewModel.popularMoviesLiveData.observeForever(eventObserver)
 //        viewModel.searchLivedata.observeForever(eventObserver)
@@ -75,7 +75,7 @@ class MoviesViewModelTest {
     @Test
     fun `get popular movie api test, success state`() = runBlocking {
 
-        testRepo = mock(MoviesRepository::class.java)
+        testRepo = mock(MoviesRepositoryImpl::class.java)
         // Given : Writing the response type which we will be getting from repository method
         val popularMovieResponse = PopularMovieResponse("", 0, mutableListOf(), 0, 0)
         val mockResponse = MockResponse()
@@ -143,7 +143,7 @@ class MoviesViewModelTest {
     @Test
     fun `get upcoming movie api test, success state`() = runBlocking {
 
-        testRepo = mock(MoviesRepository::class.java)
+        testRepo = mock(MoviesRepositoryImpl::class.java)
         // Given : Writing the response type which we will be getting from repository method
         val popularMovieResponse = PopularMovieResponse("", 0, mutableListOf(), 0, 0)
         val mockResponse = MockResponse()

@@ -2,7 +2,6 @@ package onepiece.whitebeard.movieappkotlin.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.bumptech.glide.Glide
 import onepiece.whitebeard.movieappkotlin.constants.Constant
 import onepiece.whitebeard.movieappkotlin.databinding.ActivityMovieDetailsBinding
@@ -37,8 +36,6 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun getIntents() {
         val intent = intent.extras
         movieObj = intent?.getSerializable("MOVIE_DETAIL") as PopularMovies?
-
-        Log.e("ITEM",""+movieObj)
     }
 
 }

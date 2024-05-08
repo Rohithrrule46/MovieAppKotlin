@@ -25,7 +25,7 @@ class ComingSoonFragment : Fragment(R.layout.fragment_comingsoon) {
 
     private lateinit var binding: FragmentComingsoonBinding
     val moviesViewModel: MoviesViewModel  by lazy {
-        ViewModelProvider(requireActivity()).get(MoviesViewModel::class.java)
+        ViewModelProvider(requireActivity())[MoviesViewModel::class.java]
     }
     lateinit var movieAdapter: UpcomingMoviesAdapter
 
@@ -45,13 +45,13 @@ class ComingSoonFragment : Fragment(R.layout.fragment_comingsoon) {
 
         observeUpcomingMovieLiveData()
 
-//        // Adapter Click and Go to Articles Fragment
-//        movieAdapter.setOnItemClickListener { movie ->
-//            val intent = Intent(context, MovieDetailsActivity::class.java)
-//            intent.putExtra("MOVIE_DETAIL", movie)
-//            startActivity(intent)
-//
-//        }
+        // Adapter Click and Go to Articles Fragment
+        movieAdapter.setOnItemClickListener { movie ->
+            val intent = Intent(context, MovieDetailsActivity::class.java)
+            intent.putExtra("MOVIE_DETAIL", movie)
+            startActivity(intent)
+
+        }
     }
 
     private fun hideProgressBar() {

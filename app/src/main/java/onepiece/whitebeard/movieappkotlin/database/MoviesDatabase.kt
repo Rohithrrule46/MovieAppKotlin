@@ -12,6 +12,5 @@ import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
 )
 @TypeConverters(Converters::class)
 abstract class MoviesDatabase : RoomDatabase() {
-
     abstract fun getMoviesDao(): MoviesDao
 }

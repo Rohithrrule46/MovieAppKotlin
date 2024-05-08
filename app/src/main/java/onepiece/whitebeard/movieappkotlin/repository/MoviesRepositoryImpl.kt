@@ -1,6 +1,5 @@
 package onepiece.whitebeard.movieappkotlin.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import onepiece.whitebeard.movieappkotlin.api.ApiInterface
 import onepiece.whitebeard.movieappkotlin.database.MoviesDao
@@ -10,11 +9,11 @@ import onepiece.whitebeard.movieappkotlin.other.Resource
 import retrofit2.Response
 import javax.inject.Inject
 
-class MoviesRepository @Inject constructor(
+class MoviesRepositoryImpl @Inject constructor(
     private val moviesDao: MoviesDao,
     private val apiInterface: ApiInterface
-) : MovieRepositotyInterface {
-    //
+) : MovieRepositoryProtocol {
+
     var searchMoviesPage = 1
     var searchMoviesResponse: PopularMovieResponse? = null
 
@@ -59,7 +58,7 @@ class MoviesRepository @Inject constructor(
             if (searchString.isEmpty()) {
                 return Resource.error("No Search Query", null)
             } else {
-                val response = apiInterface.getPopularMoviesApi()
+                val response = apiInterface.searchForMoviesApi(searchString = searchString, page = page)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         searchMoviesPage++

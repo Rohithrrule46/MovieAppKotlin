@@ -15,10 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-//    val viewmodel: PopularViewModel by lazy {
-//        ViewModelProvider(this).get(PopularViewModel::class.java)
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

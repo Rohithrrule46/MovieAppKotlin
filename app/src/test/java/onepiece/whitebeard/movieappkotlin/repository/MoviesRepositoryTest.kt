@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MoviesRepositoryTest {
 
-    lateinit var moviesRepository: MoviesRepository
+    lateinit var moviesRepository: MoviesRepositoryImpl
     lateinit var mockWebServer: MockWebServer
     lateinit var apiInterface: ApiInterface
     lateinit var gson: Gson
@@ -38,14 +38,14 @@ class MoviesRepositoryTest {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build().create(ApiInterface::class.java)
         dao = mock(MoviesDao::class.java)
-        moviesRepository = MoviesRepository(dao, apiInterface)
+        moviesRepository = MoviesRepositoryImpl(dao, apiInterface)
     }
 
 
     @Test
     fun `get popular movie from repository test`() = runBlocking {
 
-        moviesRepository = mock(MoviesRepository::class.java)
+        moviesRepository = mock(MoviesRepositoryImpl::class.java)
         val mockResponse = MockResponse()
 
         // Given : Writing the response type which we will be getting from repository method
@@ -69,7 +69,7 @@ class MoviesRepositoryTest {
     @Test
     fun `get searched movie from repository without search string test`() = runBlocking {
 
-        moviesRepository = mock(MoviesRepository::class.java)
+        moviesRepository = mock(MoviesRepositoryImpl::class.java)
         val mockResponse = MockResponse()
 
         // Given : Writing the response type which we will be getting from repository method
@@ -93,7 +93,7 @@ class MoviesRepositoryTest {
     @Test
     fun `get searched movie from repository with search string test`() = runBlocking {
 
-        moviesRepository = mock(MoviesRepository::class.java)
+        moviesRepository = mock(MoviesRepositoryImpl::class.java)
         val mockResponse = MockResponse()
 
         // Given : Writing the response type which we will be getting from repository method
@@ -117,7 +117,7 @@ class MoviesRepositoryTest {
     @Test
     fun `get upcoming movie from repository test`() = runBlocking {
 
-        moviesRepository = mock(MoviesRepository::class.java)
+        moviesRepository = mock(MoviesRepositoryImpl::class.java)
         val mockResponse = MockResponse()
 
         // Given : Writing the response type which we will be getting from repository method
