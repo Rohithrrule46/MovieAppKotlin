@@ -2,14 +2,10 @@ package onepiece.whitebeard.movieappkotlin.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import onepiece.whitebeard.movieappkotlin.api.ApiInterface
-import onepiece.whitebeard.movieappkotlin.database.MoviesDao
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Resource
-import org.mockito.Mockito.mock
+import onepiece.whitebeard.movieappkotlin.util.Resource
 import retrofit2.Response
-import javax.inject.Inject
 
 class FakeMoviesRepository: MovieRepositoryProtocol {
 

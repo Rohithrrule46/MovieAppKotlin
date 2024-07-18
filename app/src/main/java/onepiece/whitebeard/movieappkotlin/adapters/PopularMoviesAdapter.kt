@@ -32,7 +32,7 @@ class PopularMoviesAdapter() : RecyclerView.Adapter<PopularMoviesAdapter.Popular
     }
 
     override fun onBindViewHolder(holder: PopularMealViewHolder, position: Int) {
-        val imageUrl = Constant.ImageBaseUrl + moviesList.get(position).poster_path
+        val imageUrl = Constant.IMAGE_BASE_URL + moviesList.get(position).poster_path
         Glide.with(holder.itemView)
             .load(imageUrl)
             .into(holder.binding.imgCategoryMeal)

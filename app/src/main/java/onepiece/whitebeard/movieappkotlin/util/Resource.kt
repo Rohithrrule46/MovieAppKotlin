@@ -1,4 +1,4 @@
-package onepiece.whitebeard.movieappkotlin.other
+package onepiece.whitebeard.movieappkotlin.util
 
 
 sealed class Resource<T>(

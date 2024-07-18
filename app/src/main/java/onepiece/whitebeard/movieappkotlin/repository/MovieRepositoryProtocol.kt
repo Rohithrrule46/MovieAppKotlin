@@ -3,7 +3,7 @@ package onepiece.whitebeard.movieappkotlin.repository
 import androidx.lifecycle.LiveData
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Resource
+import onepiece.whitebeard.movieappkotlin.util.Resource
 import retrofit2.Response
 
 interface MovieRepositoryProtocol {

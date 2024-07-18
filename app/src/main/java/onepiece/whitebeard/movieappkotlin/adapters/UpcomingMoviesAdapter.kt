@@ -25,12 +25,12 @@ class UpcomingMoviesAdapter() : RecyclerView.Adapter<UpcomingMoviesAdapter.Upcom
 
     override fun onBindViewHolder(holder: UpcomingMovieViewHolder, position: Int) {
         val movie = differ.currentList[position]
-        val imageUrl = Constant.ImageBaseUrl + movie.poster_path
+        val imageUrl = Constant.IMAGE_BASE_URL + movie.poster_path
         Glide.with(holder.itemView)
             .load(imageUrl)
             .into(holder.binding.imageFirst)
 
-        val image2Url = Constant.ImageBaseUrl + movie.backdrop_path
+        val image2Url = Constant.IMAGE_BASE_URL + movie.backdrop_path
         Glide.with(holder.itemView)
             .load(image2Url)
             .into(holder.binding.imageview)

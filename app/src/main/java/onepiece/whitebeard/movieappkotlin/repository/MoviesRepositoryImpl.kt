@@ -5,7 +5,7 @@ import onepiece.whitebeard.movieappkotlin.api.ApiInterface
 import onepiece.whitebeard.movieappkotlin.database.MoviesDao
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Resource
+import onepiece.whitebeard.movieappkotlin.util.Resource
 import retrofit2.Response
 import javax.inject.Inject
 

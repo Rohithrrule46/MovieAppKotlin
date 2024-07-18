@@ -9,7 +9,6 @@ import android.widget.AbsListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -18,7 +17,7 @@ import onepiece.whitebeard.movieappkotlin.adapters.UpcomingMoviesAdapter
 import onepiece.whitebeard.movieappkotlin.constants.Constant
 import onepiece.whitebeard.movieappkotlin.databinding.FragmentComingsoonBinding
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Status
+import onepiece.whitebeard.movieappkotlin.util.Status
 import onepiece.whitebeard.movieappkotlin.viewmodel.MoviesViewModel
 
 class ComingSoonFragment : Fragment(R.layout.fragment_comingsoon) {
@@ -27,7 +26,7 @@ class ComingSoonFragment : Fragment(R.layout.fragment_comingsoon) {
     val moviesViewModel: MoviesViewModel  by lazy {
         ViewModelProvider(requireActivity())[MoviesViewModel::class.java]
     }
-    lateinit var movieAdapter: UpcomingMoviesAdapter
+    private lateinit var movieAdapter: UpcomingMoviesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,7 +77,7 @@ class ComingSoonFragment : Fragment(R.layout.fragment_comingsoon) {
                     }
                     movieAdapter.differ.submitList(moviesList as ArrayList<PopularMovies>)
 
-                    val totalPages = response.data.total_results / Constant.QUREY_PAGE_SIZE + 2
+                    val totalPages = response.data.total_results / Constant.QUERY_PAGE_SIZE + 2
                     isLastPage = moviesViewModel.upcomingMoviesPage == totalPages
                     if (isLastPage) {
                         binding.upcomingMovieRv.setPadding(0, 0, 0, 0)
@@ -106,7 +105,7 @@ class ComingSoonFragment : Fragment(R.layout.fragment_comingsoon) {
     var isLastPage = false
     var isScrolling = false
 
-    val onScrollListener = object : RecyclerView.OnScrollListener() {
+    private val onScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
@@ -125,7 +124,7 @@ class ComingSoonFragment : Fragment(R.layout.fragment_comingsoon) {
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
             val isAtLastItem = firstItemPosition + visibleItemsCount >= totalItemCount
             val isNotAtBeginning = firstItemPosition >= 0
-            val isTotalMoreThanVisible = totalItemCount >= Constant.QUREY_PAGE_SIZE
+            val isTotalMoreThanVisible = totalItemCount >= Constant.QUERY_PAGE_SIZE
             val shouldPaginate = isNotLoadingAndNotLastPage &&
                     isAtLastItem &&
                     isNotAtBeginning &&

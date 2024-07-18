@@ -10,12 +10,12 @@ interface ApiInterface {
 
     @GET("movie/popular?")
     suspend fun getPopularMoviesApi(
-        @Query("api_key") apiKey: String = Constant.apiKey,
+        @Query("api_key") API_KEY: String = Constant.API_KEY,
     ): Response<PopularMovieResponse>
 
     @GET("search/movie?")
     suspend fun searchForMoviesApi(
-        @Query("api_key") apiKey: String = Constant.apiKey,
+        @Query("api_key") API_KEY: String = Constant.API_KEY,
         @Query("language") lang: String = "en-US",
         @Query("query") searchString: String,
         @Query("page") page: Int = 1
@@ -23,7 +23,7 @@ interface ApiInterface {
 
     @GET("movie/upcoming?")
     suspend fun upcomingMoviesApi(
-        @Query("api_key") apiKey: String = Constant.apiKey,
+        @Query("api_key") API_KEY: String = Constant.API_KEY,
         @Query("language") lang: String = "en-US",
         @Query("page") page: Int = 1
     ): Response<PopularMovieResponse>

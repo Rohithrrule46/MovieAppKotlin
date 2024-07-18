@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Job
@@ -24,17 +21,16 @@ import onepiece.whitebeard.movieappkotlin.adapters.SearchMoviesAdapter
 import onepiece.whitebeard.movieappkotlin.constants.Constant
 import onepiece.whitebeard.movieappkotlin.databinding.FragmentSearchBinding
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Resource
-import onepiece.whitebeard.movieappkotlin.other.Status
+import onepiece.whitebeard.movieappkotlin.util.Status
 import onepiece.whitebeard.movieappkotlin.viewmodel.MoviesViewModel
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var binding: FragmentSearchBinding
-    lateinit var movieAdapter: SearchMoviesAdapter
+    private lateinit var movieAdapter: SearchMoviesAdapter
 
     val moviesViewModel: MoviesViewModel by lazy {
-        ViewModelProvider(requireActivity()).get(MoviesViewModel::class.java)
+        ViewModelProvider(requireActivity())[MoviesViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -101,7 +97,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         }
                         movieAdapter.differ.submitList(moviesList as ArrayList<PopularMovies>)
 
-                        val totalPages = response.data.total_results / Constant.QUREY_PAGE_SIZE + 2
+                        val totalPages = response.data.total_results / Constant.QUERY_PAGE_SIZE + 2
                         isLastPage = moviesViewModel.searchMoviesPage == totalPages
                         if (isLastPage) {
                             binding.rvSearchNews.setPadding(0, 0, 0, 0)
@@ -150,7 +146,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
             val isAtLastItem = firstItemPosition + visibleItemsCount >= totalItemCount
             val isNotAtBeginning = firstItemPosition >= 0
-            val isTotalMoreThanVisible = totalItemCount >= Constant.QUREY_PAGE_SIZE
+            val isTotalMoreThanVisible = totalItemCount >= Constant.QUERY_PAGE_SIZE
             val shouldPaginate = isNotLoadingAndNotLastPage &&
                     isAtLastItem &&
                     isNotAtBeginning &&

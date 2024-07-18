@@ -9,9 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Event
-import onepiece.whitebeard.movieappkotlin.other.Resource
-import onepiece.whitebeard.movieappkotlin.other.Status
+import onepiece.whitebeard.movieappkotlin.util.Event
+import onepiece.whitebeard.movieappkotlin.util.Resource
+import onepiece.whitebeard.movieappkotlin.util.Status
 import onepiece.whitebeard.movieappkotlin.repository.MovieRepositoryProtocol
 import retrofit2.Response
 import javax.inject.Inject
@@ -21,10 +21,6 @@ class MoviesViewModel @Inject constructor(
     private val repo: MovieRepositoryProtocol
 ) : ViewModel(), MoviesProtocol {
 
-    init {
-
-    }
-
     override var movies = MutableLiveData<Resource<List<PopularMovies>>>()
 
     override var popularMoviesLiveData = MutableLiveData<Event<Resource<PopularMovieResponse>>>()
@@ -33,7 +29,6 @@ class MoviesViewModel @Inject constructor(
 
     val searchMovies: MutableLiveData<Resource<PopularMovieResponse>> = MutableLiveData()
     var searchMoviesPage = 1
-    var searchMoviesResponse: PopularMovieResponse? = null
 
     val upcomingMoviesLivedata: MutableLiveData<Resource<PopularMovieResponse>> = MutableLiveData()
     var upcomingMoviesPage = 1
@@ -75,7 +70,6 @@ class MoviesViewModel @Inject constructor(
             Status.SUCCESS -> {
                 if (searchString.isEmpty()) {
                     searchMoviesPage = 1
-                    searchMoviesResponse = null
                     val error = "Please enter a movie name"
                     searchLivedata.postValue(Event(Resource.Error(error)))
 
@@ -85,7 +79,6 @@ class MoviesViewModel @Inject constructor(
             }
             Status.ERROR -> {
                 searchMoviesPage = 1
-                searchMoviesResponse = null
                 val error = "Please enter a movie name"
                 searchLivedata.postValue(Event(Resource.Error(error)))
             }

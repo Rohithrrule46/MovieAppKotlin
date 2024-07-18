@@ -12,7 +12,7 @@ import onepiece.whitebeard.movieappkotlin.MainCoroutineRule
 import onepiece.whitebeard.movieappkotlin.api.ApiInterface
 import onepiece.whitebeard.movieappkotlin.database.MoviesDao
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
-import onepiece.whitebeard.movieappkotlin.other.Resource
+import onepiece.whitebeard.movieappkotlin.util.Resource
 import onepiece.whitebeard.movieappkotlin.repository.MoviesRepositoryImpl
 import org.junit.*
 import org.junit.runner.RunWith

@@ -1,4 +1,4 @@
-package onepiece.whitebeard.movieappkotlin.other
+package onepiece.whitebeard.movieappkotlin.util
 
 enum class Status {
     SUCCESS,

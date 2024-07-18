@@ -15,7 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import onepiece.whitebeard.movieappkotlin.adapters.PopularMoviesAdapter
 import onepiece.whitebeard.movieappkotlin.databinding.FragmentPopularBinding
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Status
+import onepiece.whitebeard.movieappkotlin.util.Status
 import onepiece.whitebeard.movieappkotlin.viewmodel.MoviesViewModel
 
 class PopularFragment : Fragment() {

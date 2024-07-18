@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Job
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Event
-import onepiece.whitebeard.movieappkotlin.other.Resource
+import onepiece.whitebeard.movieappkotlin.util.Event
+import onepiece.whitebeard.movieappkotlin.util.Resource
 
 interface MoviesProtocol {
 

@@ -8,7 +8,7 @@ import okhttp3.mockwebserver.MockWebServer
 import onepiece.whitebeard.movieappkotlin.api.ApiInterface
 import onepiece.whitebeard.movieappkotlin.database.MoviesDao
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovieResponse
-import onepiece.whitebeard.movieappkotlin.other.Resource
+import onepiece.whitebeard.movieappkotlin.util.Resource
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

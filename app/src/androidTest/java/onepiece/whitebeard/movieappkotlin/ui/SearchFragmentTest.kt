@@ -19,7 +19,7 @@ import onepiece.whitebeard.movieappkotlin.R
 import onepiece.whitebeard.movieappkotlin.adapters.SearchMoviesAdapter
 import onepiece.whitebeard.movieappkotlin.launchFragmentInHiltContainer
 import onepiece.whitebeard.movieappkotlin.model.responses.PopularMovies
-import onepiece.whitebeard.movieappkotlin.other.Status
+import onepiece.whitebeard.movieappkotlin.util.Status
 import onepiece.whitebeard.movieappkotlin.repository.FakeMoviesRepository
 import onepiece.whitebeard.movieappkotlin.viewmodel.MoviesViewModel
 import org.junit.Before

@@ -25,7 +25,7 @@ class SearchMoviesAdapter() : RecyclerView.Adapter<SearchMoviesAdapter.SearchVie
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val movie = differ.currentList[position]
-        val imageUrl = Constant.ImageBaseUrl + movie.poster_path
+        val imageUrl = Constant.IMAGE_BASE_URL + movie.poster_path
         Glide.with(holder.itemView)
             .load(imageUrl)
             .into(holder.binding.imgCategoryMeal)
