@@ -107,7 +107,7 @@ class MoviesViewModel @Inject constructor(
 
     private fun handleUpcomingMoviesResponse(
         response: Response<PopularMovieResponse>
-    ): Resource<PopularMovieResponse>? {
+    ): Resource<PopularMovieResponse> {
         if (response.isSuccessful) {
             response.body()?.let {
                 upcomingMoviesPage++
