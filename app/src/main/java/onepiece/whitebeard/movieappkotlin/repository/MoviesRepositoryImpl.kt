@@ -39,13 +39,13 @@ class MoviesRepositoryImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 response.body()?.let {
-                    return@let Resource.success(it)
-                } ?: Resource.error("Network error", null)
+                    return@let Resource.Success(it)
+                } ?: Resource.Error("Network error", null)
             } else {
-                Resource.error("Network error", null)
+                Resource.Error("Network error", null)
             }
         } catch (e: Exception) {
-            return Resource.error("No Internet Connection", null)
+            return Resource.Error("No Internet Connection", null)
 
         }
     }
@@ -56,7 +56,7 @@ class MoviesRepositoryImpl @Inject constructor(
     ): Resource<PopularMovieResponse> {
         return try {
             if (searchString.isEmpty()) {
-                return Resource.error("No Search Query", null)
+                return Resource.Error("No Search Query", null)
             } else {
                 val response = apiInterface.searchForMoviesApi(searchString = searchString, page = page)
                 if (response.isSuccessful) {
@@ -70,15 +70,15 @@ class MoviesRepositoryImpl @Inject constructor(
 
                             oldList?.addAll(newList!!)
                         }
-                        return@let Resource.success(searchMoviesResponse ?: it)
-                    } ?: Resource.error("Network error", null)
+                        return@let Resource.Success(searchMoviesResponse ?: it)
+                    } ?: Resource.Error("Network error", null)
                 } else {
-                    Resource.error("Network error", null)
+                    Resource.Error("Network error", null)
                 }
             }
 
         } catch (e: Exception) {
-            return Resource.error("No Internet Connection", null)
+            return Resource.Error("No Internet Connection", null)
 
         }
     }

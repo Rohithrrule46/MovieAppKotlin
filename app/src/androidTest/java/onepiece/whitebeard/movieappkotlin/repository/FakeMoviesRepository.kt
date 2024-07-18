@@ -40,20 +40,20 @@ class FakeMoviesRepository: MovieRepositoryProtocol {
 //            val response = apiInterface.getPopularMoviesApi()
 //            if (response.isSuccessful) {
 //                response.body()?.let {
-//                    return@let Resource.success(it)
-//                } ?: Resource.error("Network error", null)
+//                    return@let Resource.Success(it)
+//                } ?: Resource.Error("Network error", null)
 //            } else {
-//                Resource.error("Network error", null)
+//                Resource.Error("Network error", null)
 //            }
 //        } catch (e: Exception) {
-//            return Resource.error("No Internet Connection", null)
+//            return Resource.Error("No Internet Connection", null)
 //
 //        }
 
         return if (shouldReturnNetworkError) {
-            Resource.error("error", null)
+            Resource.Error("error", null)
         } else {
-            Resource.success(PopularMovieResponse("",0, mutableListOf(),0,0))
+            Resource.Success(PopularMovieResponse("",0, mutableListOf(),0,0))
         }
     }
 
@@ -62,9 +62,9 @@ class FakeMoviesRepository: MovieRepositoryProtocol {
         page: Int
     ): Resource<PopularMovieResponse> {
         return if (shouldReturnNetworkError) {
-            Resource.error("error", null)
+            Resource.Error("error", null)
         } else {
-            Resource.success(PopularMovieResponse("",0, mutableListOf(),0,0))
+            Resource.Success(PopularMovieResponse("",0, mutableListOf(),0,0))
         }
     }
 

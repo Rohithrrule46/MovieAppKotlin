@@ -55,13 +55,13 @@ class MoviesRepositoryTest {
 
         // When
         Mockito.`when`(moviesRepository.getMoviesListFromApi())
-            .thenReturn(Resource.success(popularMovieResponse))
+            .thenReturn(Resource.Success(popularMovieResponse))
 
         // Then
         val response = apiInterface.getPopularMoviesApi()
 
         // Assertion
-        val expected = Resource.success(popularMovieResponse).data
+        val expected = Resource.Success(popularMovieResponse).data
         val actual = response.body()
         assertThat(actual).isEqualTo(expected)
     }
@@ -79,14 +79,14 @@ class MoviesRepositoryTest {
 
         // When
         Mockito.`when`(moviesRepository.searchForMovieFromRepo("", 1))
-            .thenReturn(Resource.error("No Search Query", popularMovieResponse))
+            .thenReturn(Resource.Error("No Search Query", popularMovieResponse))
 
         // Then
         val response = apiInterface.searchForMoviesApi(searchString = "")
 
         // Assertion
-        val expected = Resource.error("No Search Query", popularMovieResponse)
-        val actual = Resource.error("No Search Query", response.body())
+        val expected = Resource.Error("No Search Query", popularMovieResponse)
+        val actual = Resource.Error("No Search Query", response.body())
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -103,13 +103,13 @@ class MoviesRepositoryTest {
 
         // When
         Mockito.`when`(moviesRepository.searchForMovieFromRepo("spiderman", 1))
-            .thenReturn(Resource.success(popularMovieResponse))
+            .thenReturn(Resource.Success(popularMovieResponse))
 
         // Then
         val response = apiInterface.searchForMoviesApi(searchString = "spiderman")
 
         // Assertion
-        val expected = Resource.success(popularMovieResponse).data
+        val expected = Resource.Success(popularMovieResponse).data
         val actual = response.body()
         assertThat(actual).isEqualTo(expected)
     }
@@ -133,7 +133,7 @@ class MoviesRepositoryTest {
         val response = apiInterface.upcomingMoviesApi()
 
         // Assertion
-        val expected = Resource.success(popularMovieResponse).data
+        val expected = Resource.Success(popularMovieResponse).data
         val actual = response.body()
         assertThat(actual).isEqualTo(expected)
     }

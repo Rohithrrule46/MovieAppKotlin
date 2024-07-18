@@ -47,17 +47,17 @@ class MoviesViewModel @Inject constructor(
         val response = repo.getMoviesListFromApi()
         when (response.status) {
             Status.LOADING -> {
-                movies.postValue(Resource.loading(null))
-                popularMoviesLiveData.postValue(Event(Resource.loading(null)))
+                movies.postValue(Resource.Loading(null))
+                popularMoviesLiveData.postValue(Event(Resource.Loading(null)))
 
             }
             Status.SUCCESS -> {
-                movies.postValue(Resource.success(response.data!!.results!!))
+                movies.postValue(Resource.Success(response.data!!.results!!))
                 popularMoviesLiveData.postValue(Event(response))
             }
             Status.ERROR -> {
-                movies.postValue(Resource.error("error Fetching Movies", null))
-                popularMoviesLiveData.postValue(Event(Resource.error("error Fetching Movies", null)))
+                movies.postValue(Resource.Error("error Fetching Movies", null))
+                popularMoviesLiveData.postValue(Event(Resource.Error("error Fetching Movies", null)))
             }
         }
     }
@@ -70,14 +70,14 @@ class MoviesViewModel @Inject constructor(
 
         when (response.status) {
             Status.LOADING -> {
-                searchLivedata.postValue(Event(Resource.loading(null)))
+                searchLivedata.postValue(Event(Resource.Loading(null)))
             }
             Status.SUCCESS -> {
                 if (searchString.isEmpty()) {
                     searchMoviesPage = 1
                     searchMoviesResponse = null
                     val error = "Please enter a movie name"
-                    searchLivedata.postValue(Event(Resource.error(error)))
+                    searchLivedata.postValue(Event(Resource.Error(error)))
 
                 } else {
                     searchLivedata.postValue(Event(response))
@@ -87,14 +87,14 @@ class MoviesViewModel @Inject constructor(
                 searchMoviesPage = 1
                 searchMoviesResponse = null
                 val error = "Please enter a movie name"
-                searchLivedata.postValue(Event(Resource.error(error)))
+                searchLivedata.postValue(Event(Resource.Error(error)))
             }
         }
 
     }
 
     override fun getUpcomingMovies() = viewModelScope.launch {
-        upcomingMoviesLivedata.postValue(Resource.loading(null))
+        upcomingMoviesLivedata.postValue(Resource.Loading(null))
         val response = repo.upcomingMovies(upcomingMoviesPage)
 
         upcomingMoviesLivedata.postValue(handleUpcomingMoviesResponse(response))
@@ -119,11 +119,11 @@ class MoviesViewModel @Inject constructor(
 
                     oldList?.addAll(newList!!)
                 }
-                return Resource.success(upcomingMoviesResponse ?: it)
+                return Resource.Success(upcomingMoviesResponse ?: it)
             }
         }
 
-        return Resource.error("Network error")
+        return Resource.Error("Network error")
     }
 
 }

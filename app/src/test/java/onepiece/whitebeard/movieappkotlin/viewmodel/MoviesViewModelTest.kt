@@ -36,10 +36,10 @@ class MoviesViewModelTest {
     var mainCoroutineRule = MainCoroutineRule()
 
     private lateinit var testRepo: MoviesRepositoryImpl
-    lateinit var mockWebServer: MockWebServer
-    lateinit var apiInterface: ApiInterface
-    lateinit var gson: Gson
-    lateinit var dao: MoviesDao
+    private lateinit var mockWebServer: MockWebServer
+    private lateinit var apiInterface: ApiInterface
+    private lateinit var gson: Gson
+    private lateinit var dao: MoviesDao
 
 
     private lateinit var viewModel: MoviesViewModel
@@ -83,13 +83,13 @@ class MoviesViewModelTest {
 
 
         `when`(testRepo.getMoviesListFromApi())
-            .thenReturn(Resource.success(popularMovieResponse))
+            .thenReturn(Resource.Success(popularMovieResponse))
 
         viewModel.getPopularMoviesFromApi()
 
         viewModel.popularMoviesLiveData.observeForever {
             it.getContentIfNotHandled()?.let { result ->
-                assertThat(result).isEqualTo(Resource.success(popularMovieResponse))
+                assertThat(result).isEqualTo(Resource.Success(popularMovieResponse))
             }
 
         }
@@ -106,13 +106,13 @@ class MoviesViewModelTest {
 
 
         `when`(testRepo.searchForMovieFromRepo("", 1))
-            .thenReturn(Resource.error("Please enter a movie name", null))
+            .thenReturn(Resource.Error("Please enter a movie name", null))
 
         viewModel.searchForMovies("")
 
         viewModel.searchLivedata.observeForever {
             it.getContentIfNotHandled()?.let { result ->
-                assertThat(result).isEqualTo(Resource.error("Please enter a movie name", null))
+                assertThat(result).isEqualTo(Resource.Error("Please enter a movie name", null))
             }
         }
 
@@ -127,13 +127,13 @@ class MoviesViewModelTest {
         mockWebServer.enqueue(mockResponse.setBody(gson.toJson(popularMovieResponse)))
 
         `when`(testRepo.searchForMovieFromRepo("Spiderman", 1))
-            .thenReturn(Resource.success(popularMovieResponse))
+            .thenReturn(Resource.Success(popularMovieResponse))
 
         viewModel.searchForMovies("Spiderman")
 
         viewModel.searchLivedata.observeForever {
             it.getContentIfNotHandled()?.let { result ->
-                assertThat(result).isEqualTo(Resource.success(popularMovieResponse))
+                assertThat(result).isEqualTo(Resource.Success(popularMovieResponse))
             }
         }
 
@@ -156,7 +156,7 @@ class MoviesViewModelTest {
         viewModel.getUpcomingMovies()
 
         viewModel.upcomingMoviesLivedata.observeForever { result ->
-                assertThat(result).isEqualTo(Resource.success(popularMovieResponse))
+                assertThat(result).isEqualTo(Resource.Success(popularMovieResponse))
             }
 
         }

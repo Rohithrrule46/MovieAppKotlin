@@ -1,28 +1,12 @@
 package onepiece.whitebeard.movieappkotlin.other
 
 
-data class Resource<out T>(
+sealed class Resource<T>(
     val status: Status,
     val data: T? = null,
     val message: String? = null
 ) {
-    companion object {
-        fun <T> success(data: T): Resource<T> {
-            return Resource(Status.SUCCESS, data, null)
-        }
-
-        fun <T> error(message: String, data: T? = null): Resource<T> {
-            return Resource(Status.ERROR, data, message)
-        }
-
-        fun <T> loading(data: T? = null): Resource<T> {
-            return Resource(Status.LOADING, data, null)
-        }
-    }
-}
-
-enum class Status {
-    SUCCESS,
-    ERROR,
-    LOADING
+    class Success<T>(data: T?) : Resource<T>(Status.SUCCESS, data, null)
+    class Error<T>(message: String, data: T? = null) : Resource<T>(Status.ERROR, data, message)
+    class Loading<T>(data: T? = null) : Resource<T>(Status.LOADING, data, null)
 }

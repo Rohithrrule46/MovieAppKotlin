@@ -20,27 +20,27 @@ import javax.inject.Singleton
 object AppModule {
 
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideMovieDatabase(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, MoviesDatabase::class.java, "movies_db")
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideMovieRepository(
         dao: MoviesDao,
         api: ApiInterface
     ) = MoviesRepositoryImpl(dao, api) as MovieRepositoryProtocol
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideMoviesDao(database: MoviesDatabase) = database.getMoviesDao()
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideRetrofitApi(): ApiInterface {
         return RetrofitInstance.api
     }
